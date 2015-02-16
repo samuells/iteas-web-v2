@@ -1,0 +1,7 @@
+.owl-carousel {
+  list-style: none;
+  margin-left: 0;
+  @media #{$medium-up} {
+      @include block-grid(4);
+  }
+}

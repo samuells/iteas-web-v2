@@ -1,0 +1,48 @@
+// Edited by S.Snopko
+
+@mixin transition($properties: all, $duration: 300ms, $easing: ease-out, $delay:0) {
+	@if length($properties) > 1 {
+		-webkit-transition-property: $properties;
+		-webkit-transition-duration: $duration;
+		-webkit-transition-timing-function: $easing;
+		-moz-transition-property: $properties;	
+		-moz-transition-duration: $duration;
+		-moz-transition-timing-function: $easing;
+		-ms-transition-property: $properties;
+		-ms-transition-duration: $duration;
+		-ms-transition-timing-function: $easing;
+		-o-transition-property: $properties;
+		-o-transition-duration: $duration;
+		-o-transition-timing-function: $easing;
+		transition-property: $properties;	
+		transition-duration: $duration;
+		transition-timing-function: $easing;
+	} @else {
+		transition: $properties $duration $easing;
+		-webkit-transition: $properties $duration $easing;
+		-moz-transition: $properties $duration $easing;
+		-ms-transition: $properties $duration $easing;
+		-o-transition: $properties $duration $easing;		
+	}
+	@if ($delay != 0){
+		transition-delay: $delay;
+		-webkit-transition-delay: $delay;
+		-moz-transition-delay: $delay;
+		-ms-transition-delay: $delay;
+		-o-transition-delay: $delay;
+	}
+}
+
+@mixin rounded($radius:0px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin transform($prop){
+	-webkit-transform: $prop;
+	-moz-transform: $prop;
+	-ms-transform: $prop;
+	-o-transform: $prop;
+	transform: $prop;
+}

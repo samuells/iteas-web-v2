@@ -1,0 +1,13 @@
+.hero-image {
+  background-image: url("http://placehold.it/1200x600&text=Hero Image");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 80%;
+  min-height: rem-calc(400);
+}
+.hero-text-area {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}

@@ -1,163 +1,423 @@
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ITeas:home</title>
-    <link rel="stylesheet" href="css/app.css" />
-    <script src="bower_components/modernizr/modernizr.js"></script>
-  </head>
-  <body>
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>Welcome to Foundation</h1>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITeas:home</title>
+  <link rel="stylesheet" href="css/app.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <style>
+    #map-canvas {
+        width: 100%!important;
+        height: 500px;
+    }
+    .infoWindowContent {
+        line-height: 1.35;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .infoWindowContent p {
+        margin: 0;
+    }
+    .infoWindowContent h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    div.gm-style-iw {
+        overflow: hidden!important;
+    }
+    </style>
+    <script src="js/dist/modernizr.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+    var bounds = new google.maps.LatLngBounds();
+    var mapzoom = 7;
+    var mapcenter = new google.maps.LatLng(47.958960559319856, 12.196906093749913);
+    var iconpath = "img/pin.png";
+    var map;
+    // var mail = "info@pidas.com";
+    var currentInfoWin = null;
+    var standorte = new Array();
+
+    // Alle Standorte
+    standorte[0] = new Array();
+    standorte[0]["info"] = new Array();
+    standorte[0]["latlng"] = new google.maps.LatLng(48.80080, 9.22574);
+    standorte[0]["line1"] = "Stuttgart";
+    standorte[0]["company"] = "PIDAS Deutschland GmbH";
+    standorte[0]["info"][0] = "Frösnerstraβe 4";
+    standorte[0]["info"][1] = "70372 Stuttgart";
+    standorte[0]["info"][2] = "DEUTSCHLAND";
+    standorte[0]["tel"] = "TEL: +49 711 98 80 90 08";
+    standorte[0]["fax"] = "FAX: +49 711 98 80 90 08 10";
+    standorte[0]["pin"] = "img/pins/pin_stuttgart.png";
+    standorte[0]["mail"] = "info@pidas.com";
+
+    standorte[1] = new Array();
+    standorte[1]["info"] = new Array();
+    standorte[1]["latlng"] = new google.maps.LatLng(47.54131, 7.62172);
+    standorte[1]["line1"] = "Basel";
+    standorte[1]["company"] = "PIDAS Aktiengesellschaft";
+    standorte[1]["info"][0] = "St. Jakob-Turm";
+    standorte[1]["info"][1] = "Birsstrasse 320";
+    standorte[1]["info"][2] = "4052 Basel";
+    standorte[1]["info"][3] = "SCHWEIZ";
+    standorte[1]["tel"] = "TEL: +41 61 278 00 00";
+    standorte[1]["fax"] = "FAX: +41 61 278 00 30";
+    standorte[1]["pin"] = "img/pins/pin_basel.png";
+    standorte[1]["mail"] = "info@pidas.com";
+
+    standorte[2] = new Array();
+    standorte[2]["info"] = new Array();
+    standorte[2]["latlng"] = new google.maps.LatLng(47.35792, 8.55348);
+    standorte[2]["line1"] = "Zürich";
+    standorte[2]["company"] = "PIDAS Aktiengesellschaft";
+    standorte[2]["info"][0] = "Lindenstrasse 38";
+    standorte[2]["info"][1] = "8034 Zürich";
+    standorte[2]["info"][2] = "SCHWEIZ";
+    standorte[2]["tel"] = "TEL: +41 44 388 98 68";
+    standorte[2]["fax"] = "FAX: +41 44 388 98 78";
+    standorte[2]["pin"] = "img/pins/pin_zuerich.png";
+    standorte[2]["mail"] = "info@pidas.com";
+
+    standorte[3] = new Array();
+    standorte[3]["info"] = new Array();
+    standorte[3]["latlng"] = new google.maps.LatLng(48.16995, 16.33444);
+    standorte[3]["line1"] = "Wien";
+    standorte[3]["company"] = "PIDAS Österreich GmbH";
+    standorte[3]["info"][0] = "Euro Plaza, Bauteil D";
+    standorte[3]["info"][1] = "Technologiestraße 8/2/3";
+    standorte[3]["info"][2] = "1120 Wien";
+    standorte[3]["info"][3] = "ÖSTERREICH";
+    standorte[3]["tel"] = "TEL: +43 1 315 44 34 0";
+    standorte[3]["fax"] = "FAX: +43 1 315 44 34 20";
+    standorte[3]["pin"] = "img/pins/pin_wien.png";
+    standorte[3]["mail"] = "info@pidas.com";
+
+    standorte[4] = new Array();
+    standorte[4]["info"] = new Array();
+    standorte[4]["latlng"] = new google.maps.LatLng(47.07071, 15.43950);
+    standorte[4]["line1"] = "Graz";
+    standorte[4]["company"] = "PIDAS Österreich GmbH";
+    standorte[4]["info"][0] = "Schmiedlstraβe 1";
+    standorte[4]["info"][1] = "8042 Graz";
+    standorte[4]["info"][2] = "ÖSTERREICH";
+    standorte[4]["tel"] = "TEL: +43 316 4110 0";
+    standorte[4]["fax"] = "FAX: +43 316 4110 10";
+    standorte[4]["pin"] = "img/pins/pin_graz.png";
+    standorte[4]["mail"] = "info@pidas.com";
+
+    standorte[5] = new Array();
+    standorte[5]["info"] = new Array();
+    standorte[5]["latlng"] = new google.maps.LatLng(48.133950, 11.579601);
+    standorte[5]["line1"] = "München";
+    standorte[5]["info"][0] = "Opening soon";
+    standorte[5]["pin"] = "img/pins/pin_muenchen.png";
+
+
+    // get current browser width
+    function getWidth() {
+        if (self.innerHeight) {
+            return self.innerWidth;
+        }
+
+        if (document.documentElement && document.documentElement.clientHeight) {
+            return document.documentElement.clientWidth;
+        }
+
+        if (document.body) {
+            return document.body.clientWidth;
+        }
+    }
+
+    // set the zoom according to the browser width
+    function setZoom() {
+        if (getWidth() < 500) {
+            zoom = 5;
+        } else if (getWidth() < 900) {
+            zoom = 6;
+        } else {
+            zoom = 7;
+        }
+
+        map.setZoom(zoom);
+    }
+
+    // initialize the map
+    function initialize() {
+
+        var mapCanvas = document.getElementById('map-canvas');
+
+        var mapOptions = {
+            center: mapcenter,
+            zoom: mapzoom,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(mapCanvas, mapOptions);
+
+        // set Marker for eeach Standort
+        standorte.forEach(function(e) {
+
+            // create Marker
+            var marker = new google.maps.Marker({
+                position: e["latlng"],
+                map: map,
+                // title: 'Hello World!',
+                clickable: true,
+                icon: e["pin"] ? e["pin"] : iconpath
+            });
+
+            // create InfoWindow
+            var infoContent = '<div class="infoWindowContent">';
+
+            infoContent += '<h3>' + e["line1"] + '</h3>';
+            infoContent += e["company"] ? '<p class="company-name">' + e["company"] + '</p>' : "";
+
+            e["info"].forEach(function(e) {
+                infoContent += '<p>' + e + '</p>';
+            });
+
+            infoContent += e["tel"] ? '<p>' + e["tel"] + '</p>' : "";
+            infoContent += e["fax"] ? '<p>' + e["fax"] + '</p>' : "";
+            infoContent += e["mail"] ? '<p><a href=mailto:' + e["mail"] + '>' + e["mail"] + '</a></p>' : "";
+
+            infoContent += '</div>';
+
+            marker.info = new google.maps.InfoWindow({
+                content: infoContent,
+                maxWidth: 400
+            });
+
+            // Close the other Info Windows when opening a new one
+            google.maps.event.addListener(marker, 'click', function() {
+                if (currentInfoWin !== null) {
+                    currentInfoWin.close(map, this);
+                }
+                marker.info.open(map, marker);
+                currentInfoWin = marker.info;
+            });
+        });
+
+        // set zoom correctly according the browser width
+        setZoom();
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    // Center the map on resize and set the zoom correctly
+    google.maps.event.addDomListener(window, 'resize', function() {
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(mapcenter);
+        setZoom();
+
+    });
+    </script>
+</head>
+
+<body>
+  <div class="panel hero-image">
+    <div class="row hero-text-area">
+      <div class="large-4 columns">
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex numquam quo tempora deleniti sint.</p>
+        <a href="#" class="primary medium button">Detail info</a>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="large-12 columns">
-        <div class="panel">
-          <h3>We&rsquo;re stoked you want to try Foundation! </h3>
-          <p>To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-          <p>Once you've exhausted the fun in this document, you should check out:</p>
-          <div class="row">
-            <div class="large-4 medium-4 columns">
-          <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
-        </div>
-            <div class="large-4 medium-4 columns">
-              <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
-            </div>
-            <div class="large-4 medium-4 columns">
-              <p><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</p>
-            </div>
-          </div>
-        </div>
+  <div class="panel">
+    <div class="row ">
+      <div class="medium-10 large-8 medium-centered columns text-center">
+        <h1>Sluzby</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo aperiam, necessitatibus eum libero soluta dicta in pariatur? Laudantium ad inventore sed commodi nisi, aliquid veritatis necessitatibus numquam. Aliquam quisquam, nobis?</p>
       </div>
     </div>
+  </div>
 
+  <div class="panel">
     <div class="row">
-      <div class="large-8 medium-8 columns">
-        <h5>Here&rsquo;s your basic grid:</h5>
-        <!-- Grid Example -->
-
-        <div class="row">
-          <div class="large-12 columns">
-            <div class="callout panel">
-              <p><strong>This is a twelve column section in a row.</strong> Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-6 medium-6 columns">
-            <div class="callout panel">
-              <p>Six columns</p>
-            </div>
-          </div>
-          <div class="large-6 medium-6 columns">
-            <div class="callout panel">
-              <p>Six columns</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-          <div class="large-4 medium-4 small-4 columns">
-            <div class="callout panel">
-              <p>Four columns</p>
-            </div>
-          </div>
-        </div>
-
-        <hr />
-
-        <h5>We bet you&rsquo;ll need a form somewhere:</h5>
-        <form>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-12.columns" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-4 medium-4 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-4.columns" />
-            </div>
-            <div class="large-4 medium-4 columns">
-              <label>Input Label</label>
-              <input type="text" placeholder="large-4.columns" />
-            </div>
-            <div class="large-4 medium-4 columns">
-              <div class="row collapse">
-                <label>Input Label</label>
-                <div class="small-9 columns">
-                  <input type="text" placeholder="small-9.columns" />
-                </div>
-                <div class="small-3 columns">
-                  <span class="postfix">.com</span>
-                </div>
+      <div class="column">
+        <ul class="large-block-grid-3 no-bullet text-center">
+          <li>
+            <div class="row">
+              <div class="medium-4 large-12 columns">
+                <img src="http://placehold.it/200&text=icon)" alt="">
+              </div>
+              <div class="medium-8 large-12 columns medium-only-text-left">
+                <h2>Outsorcing IT infrastruktury</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi et eius culpa facilis ea illum quisquam adipisci unde. Id eveniet, error esse. Voluptate numquam, adipisci eligendi sit repellat eaque amet!</p>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Select Box</label>
-              <select>
-                <option value="husker">Husker</option>
-                <option value="starbuck">Starbuck</option>
-                <option value="hotdog">Hot Dog</option>
-                <option value="apollo">Apollo</option>
-              </select>
+          </li>
+          <li>
+            <div class="row">
+              <div class="medium-4 large-12 columns">
+                <img src="http://placehold.it/200&text=icon)" alt="">
+              </div>
+              <div class="medium-8 large-12 columns medium-only-text-left">
+                <h2>Bezpecnost IT infrastruktury</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius nulla et officia voluptatibus explicabo quidem quisquam, iste provident nam a, natus aspernatur laboriosam quae! Omnis aspernatur similique fugit aliquam fuga.</p>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="large-6 medium-6 columns">
-              <label>Choose Your Favorite</label>
-              <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Radio 1</label>
-              <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Radio 2</label>
+          </li>
+          <li>
+            <div class="row">
+              <div class="medium-4 large-12 columns">
+                <img src="http://placehold.it/200&text=icon)" alt="">
+              </div>
+              <div class="medium-8 large-12 columns medium-only-text-left">
+                <h2>Vyvoj informacnych systemov</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, placeat, est nesciunt quis odit voluptatem. Veritatis eius magnam eveniet quis rerum, dolore id iure aliquid voluptatem officiis qui ullam, odit.</p>
+              </div>
             </div>
-            <div class="large-6 medium-6 columns">
-              <label>Check these out</label>
-              <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-              <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Textarea Label</label>
-              <textarea placeholder="small-12.columns"></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="large-4 medium-4 columns">
-        <h5>Try one of these buttons:</h5>
-        <p><a href="#" class="small button">Simple Button</a><br/>
-        <a href="#" class="small radius button">Radius Button</a><br/>
-        <a href="#" class="small round button">Round Button</a><br/>
-        <a href="#" class="medium success button">Success Btn</a><br/>
-        <a href="#" class="medium alert button">Alert Btn</a><br/>
-        <a href="#" class="medium secondary button">Secondary Btn</a></p>
-        <div class="panel">
-          <h5>So many components, girl!</h5>
-          <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
-          <a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/foundation/js/foundation.min.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+  <div class="panel">
+    <div class="row ">
+      <div class="medium-10 large-8 medium-centered columns text-center">
+        <h1>Referencie</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo aperiam, necessitatibus eum libero soluta dicta in pariatur? Laudantium ad inventore sed commodi nisi, aliquid veritatis necessitatibus numquam. Aliquam quisquam, nobis?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="column">
+        <ul class="owl-carousel">
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+          <li class="item">
+            <img src="http://placehold.it/400x100&text=logo" alt="">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="panel">
+    <div class="row ">
+      <div class="medium-10 large-8 medium-centered columns text-center">
+        <h1>O Nas</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo aperiam, necessitatibus eum libero soluta dicta in pariatur? Laudantium ad inventore sed commodi nisi, aliquid veritatis necessitatibus numquam. Aliquam quisquam, nobis?</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="medium-10 medium-centered column">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eum, deserunt. Sequi repellendus rerum commodi dolorem modi perspiciatis nostrum, corporis unde sed molestias repudiandae cum, assumenda magni expedita soluta. Praesentium.</p>
+        <div class="row">
+          <div class="medium-6 columns text-center">
+            <img src="http://placehold.it/300&text=obrazok" alt="">
+          </div>
+          <div class="medium-6 columns text-center">
+            <img src="http://placehold.it/300&text=obrazok" alt="">
+          </div>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit nisi et, fuga quaerat provident quibusdam maxime, pariatur facilis sit minima necessitatibus quas eaque ipsum dolorum ratione fugit voluptates porro, tempora.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi eligendi, architecto quam, in minus animi a praesentium neque suscipit reiciendis nostrum provident deleniti quibusdam consequatur quas voluptatum voluptate, maxime repellendus!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="medium-10 medium-centered column text-center">
+        <h1>Kontakt</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, deleniti.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="medium-10 medium-centered column">
+        <form data-abide>
+          <div class="row">
+            <div class="medium-6 columns">
+              <input type="text" placeholder="Vase Meno" required pattern="[a-zA-Z]+">
+            </div>
+            <div class="medium-6 columns">
+              <input type="email" placeholder="Email" required pattern="email">
+              <small class="error">A valid email address is required.</small>
+            </div>
+            <div class="medium-12 columns">
+              <textarea class="text-area" type="text" placeholder="Sprava" required></textarea>
+            </div>
+          </div>
+            <div class="row">
+              <div class="medium-4 medium-centered column">
+                <a href="#" class="primary medium button expand">Odoslat</a>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="map-canvas"></div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/foundation/js/foundation.min.js"></script>
+  <script src="bower_components/foundation/js/foundation.abide.js"></script>
+  <script src="js/vendors/owl.carousel.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  $(document).ready(function() {
+
+    $(window).on('load', function() {
+      // Create breakpoint body.class
+      // https://github.com/zurb/foundation/issues/513
+      if (!window.matchMedia(Foundation.media_queries.medium).matches) {
+        $('.owl-carousel').owlCarousel({
+          loop: true,
+          margin: 10,
+          dots: true,
+          autoplay: true,
+          autoplayTimeout: 1000,
+          responsive: {
+            0: {
+              items: 1
+            },
+            600: {
+              items: 3
+            },
+            1000: {
+              items: 5
+            }
+          }
+        });
+      }
+    });
+  });
+  </script>
+</body>
+
 </html>

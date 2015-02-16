@@ -1,6 +1,5 @@
 # Iteas Website v2 (resurrection)
-## Foundation libsass template
-
+Foundation libsass template
 This site is base on the template of foundation (zurb.foundation.com) and libsass
 
 ## Requirements
