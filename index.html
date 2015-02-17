@@ -9,227 +9,241 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
   <script src="bower_components/modernizr/modernizr.js"></script>
   <style>
-    #map-canvas {
-        width: 100%!important;
-        height: 500px;
+  #map-canvas {
+    width: 100%!important;
+    height: 500px;
+  }
+  .infoWindowContent {
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .infoWindowContent p {
+    margin: 0;
+  }
+  .infoWindowContent h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  div.gm-style-iw {
+    overflow: hidden!important;
+  }
+  </style>
+  <script src="js/dist/modernizr.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script>
+  var bounds = new google.maps.LatLngBounds();
+  var mapzoom = 7;
+  var mapcenter = new google.maps.LatLng(47.958960559319856, 12.196906093749913);
+  var iconpath = "img/pin.png";
+  var map;
+  // var mail = "info@pidas.com";
+  var currentInfoWin = null;
+  var standorte = new Array();
+
+  // Alle Standorte
+  standorte[0] = new Array();
+  standorte[0]["info"] = new Array();
+  standorte[0]["latlng"] = new google.maps.LatLng(48.80080, 9.22574);
+  standorte[0]["line1"] = "Stuttgart";
+  standorte[0]["company"] = "PIDAS Deutschland GmbH";
+  standorte[0]["info"][0] = "Frösnerstraβe 4";
+  standorte[0]["info"][1] = "70372 Stuttgart";
+  standorte[0]["info"][2] = "DEUTSCHLAND";
+  standorte[0]["tel"] = "TEL: +49 711 98 80 90 08";
+  standorte[0]["fax"] = "FAX: +49 711 98 80 90 08 10";
+  standorte[0]["pin"] = "img/pins/pin_stuttgart.png";
+  standorte[0]["mail"] = "info@pidas.com";
+
+  standorte[1] = new Array();
+  standorte[1]["info"] = new Array();
+  standorte[1]["latlng"] = new google.maps.LatLng(47.54131, 7.62172);
+  standorte[1]["line1"] = "Basel";
+  standorte[1]["company"] = "PIDAS Aktiengesellschaft";
+  standorte[1]["info"][0] = "St. Jakob-Turm";
+  standorte[1]["info"][1] = "Birsstrasse 320";
+  standorte[1]["info"][2] = "4052 Basel";
+  standorte[1]["info"][3] = "SCHWEIZ";
+  standorte[1]["tel"] = "TEL: +41 61 278 00 00";
+  standorte[1]["fax"] = "FAX: +41 61 278 00 30";
+  standorte[1]["pin"] = "img/pins/pin_basel.png";
+  standorte[1]["mail"] = "info@pidas.com";
+
+  standorte[2] = new Array();
+  standorte[2]["info"] = new Array();
+  standorte[2]["latlng"] = new google.maps.LatLng(47.35792, 8.55348);
+  standorte[2]["line1"] = "Zürich";
+  standorte[2]["company"] = "PIDAS Aktiengesellschaft";
+  standorte[2]["info"][0] = "Lindenstrasse 38";
+  standorte[2]["info"][1] = "8034 Zürich";
+  standorte[2]["info"][2] = "SCHWEIZ";
+  standorte[2]["tel"] = "TEL: +41 44 388 98 68";
+  standorte[2]["fax"] = "FAX: +41 44 388 98 78";
+  standorte[2]["pin"] = "img/pins/pin_zuerich.png";
+  standorte[2]["mail"] = "info@pidas.com";
+
+  standorte[3] = new Array();
+  standorte[3]["info"] = new Array();
+  standorte[3]["latlng"] = new google.maps.LatLng(48.16995, 16.33444);
+  standorte[3]["line1"] = "Wien";
+  standorte[3]["company"] = "PIDAS Österreich GmbH";
+  standorte[3]["info"][0] = "Euro Plaza, Bauteil D";
+  standorte[3]["info"][1] = "Technologiestraße 8/2/3";
+  standorte[3]["info"][2] = "1120 Wien";
+  standorte[3]["info"][3] = "ÖSTERREICH";
+  standorte[3]["tel"] = "TEL: +43 1 315 44 34 0";
+  standorte[3]["fax"] = "FAX: +43 1 315 44 34 20";
+  standorte[3]["pin"] = "img/pins/pin_wien.png";
+  standorte[3]["mail"] = "info@pidas.com";
+
+  standorte[4] = new Array();
+  standorte[4]["info"] = new Array();
+  standorte[4]["latlng"] = new google.maps.LatLng(47.07071, 15.43950);
+  standorte[4]["line1"] = "Graz";
+  standorte[4]["company"] = "PIDAS Österreich GmbH";
+  standorte[4]["info"][0] = "Schmiedlstraβe 1";
+  standorte[4]["info"][1] = "8042 Graz";
+  standorte[4]["info"][2] = "ÖSTERREICH";
+  standorte[4]["tel"] = "TEL: +43 316 4110 0";
+  standorte[4]["fax"] = "FAX: +43 316 4110 10";
+  standorte[4]["pin"] = "img/pins/pin_graz.png";
+  standorte[4]["mail"] = "info@pidas.com";
+
+  standorte[5] = new Array();
+  standorte[5]["info"] = new Array();
+  standorte[5]["latlng"] = new google.maps.LatLng(48.133950, 11.579601);
+  standorte[5]["line1"] = "München";
+  standorte[5]["info"][0] = "Opening soon";
+  standorte[5]["pin"] = "img/pins/pin_muenchen.png";
+
+
+  // get current browser width
+  function getWidth() {
+    if (self.innerHeight) {
+      return self.innerWidth;
     }
-    .infoWindowContent {
-        line-height: 1.35;
-        overflow: hidden;
-        white-space: nowrap;
+
+    if (document.documentElement && document.documentElement.clientHeight) {
+      return document.documentElement.clientWidth;
     }
-    .infoWindowContent p {
-        margin: 0;
+
+    if (document.body) {
+      return document.body.clientWidth;
     }
-    .infoWindowContent h3 {
-        margin-top: 0;
-        margin-bottom: 5px;
+  }
+
+  // set the zoom according to the browser width
+  function setZoom() {
+    if (getWidth() < 500) {
+      zoom = 5;
+    } else if (getWidth() < 900) {
+      zoom = 6;
+    } else {
+      zoom = 7;
     }
-    div.gm-style-iw {
-        overflow: hidden!important;
+
+    map.setZoom(zoom);
+  }
+
+  // initialize the map
+  function initialize() {
+
+    var mapCanvas = document.getElementById('map-canvas');
+
+    var mapOptions = {
+      center: mapcenter,
+      zoom: mapzoom,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-    </style>
-    <script src="js/dist/modernizr.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-    var bounds = new google.maps.LatLngBounds();
-    var mapzoom = 7;
-    var mapcenter = new google.maps.LatLng(47.958960559319856, 12.196906093749913);
-    var iconpath = "img/pin.png";
-    var map;
-    // var mail = "info@pidas.com";
-    var currentInfoWin = null;
-    var standorte = new Array();
 
-    // Alle Standorte
-    standorte[0] = new Array();
-    standorte[0]["info"] = new Array();
-    standorte[0]["latlng"] = new google.maps.LatLng(48.80080, 9.22574);
-    standorte[0]["line1"] = "Stuttgart";
-    standorte[0]["company"] = "PIDAS Deutschland GmbH";
-    standorte[0]["info"][0] = "Frösnerstraβe 4";
-    standorte[0]["info"][1] = "70372 Stuttgart";
-    standorte[0]["info"][2] = "DEUTSCHLAND";
-    standorte[0]["tel"] = "TEL: +49 711 98 80 90 08";
-    standorte[0]["fax"] = "FAX: +49 711 98 80 90 08 10";
-    standorte[0]["pin"] = "img/pins/pin_stuttgart.png";
-    standorte[0]["mail"] = "info@pidas.com";
+    map = new google.maps.Map(mapCanvas, mapOptions);
 
-    standorte[1] = new Array();
-    standorte[1]["info"] = new Array();
-    standorte[1]["latlng"] = new google.maps.LatLng(47.54131, 7.62172);
-    standorte[1]["line1"] = "Basel";
-    standorte[1]["company"] = "PIDAS Aktiengesellschaft";
-    standorte[1]["info"][0] = "St. Jakob-Turm";
-    standorte[1]["info"][1] = "Birsstrasse 320";
-    standorte[1]["info"][2] = "4052 Basel";
-    standorte[1]["info"][3] = "SCHWEIZ";
-    standorte[1]["tel"] = "TEL: +41 61 278 00 00";
-    standorte[1]["fax"] = "FAX: +41 61 278 00 30";
-    standorte[1]["pin"] = "img/pins/pin_basel.png";
-    standorte[1]["mail"] = "info@pidas.com";
+    // set Marker for eeach Standort
+    standorte.forEach(function(e) {
 
-    standorte[2] = new Array();
-    standorte[2]["info"] = new Array();
-    standorte[2]["latlng"] = new google.maps.LatLng(47.35792, 8.55348);
-    standorte[2]["line1"] = "Zürich";
-    standorte[2]["company"] = "PIDAS Aktiengesellschaft";
-    standorte[2]["info"][0] = "Lindenstrasse 38";
-    standorte[2]["info"][1] = "8034 Zürich";
-    standorte[2]["info"][2] = "SCHWEIZ";
-    standorte[2]["tel"] = "TEL: +41 44 388 98 68";
-    standorte[2]["fax"] = "FAX: +41 44 388 98 78";
-    standorte[2]["pin"] = "img/pins/pin_zuerich.png";
-    standorte[2]["mail"] = "info@pidas.com";
+      // create Marker
+      var marker = new google.maps.Marker({
+        position: e["latlng"],
+        map: map,
+        // title: 'Hello World!',
+        clickable: true,
+        icon: e["pin"] ? e["pin"] : iconpath
+      });
 
-    standorte[3] = new Array();
-    standorte[3]["info"] = new Array();
-    standorte[3]["latlng"] = new google.maps.LatLng(48.16995, 16.33444);
-    standorte[3]["line1"] = "Wien";
-    standorte[3]["company"] = "PIDAS Österreich GmbH";
-    standorte[3]["info"][0] = "Euro Plaza, Bauteil D";
-    standorte[3]["info"][1] = "Technologiestraße 8/2/3";
-    standorte[3]["info"][2] = "1120 Wien";
-    standorte[3]["info"][3] = "ÖSTERREICH";
-    standorte[3]["tel"] = "TEL: +43 1 315 44 34 0";
-    standorte[3]["fax"] = "FAX: +43 1 315 44 34 20";
-    standorte[3]["pin"] = "img/pins/pin_wien.png";
-    standorte[3]["mail"] = "info@pidas.com";
+      // create InfoWindow
+      var infoContent = '<div class="infoWindowContent">';
 
-    standorte[4] = new Array();
-    standorte[4]["info"] = new Array();
-    standorte[4]["latlng"] = new google.maps.LatLng(47.07071, 15.43950);
-    standorte[4]["line1"] = "Graz";
-    standorte[4]["company"] = "PIDAS Österreich GmbH";
-    standorte[4]["info"][0] = "Schmiedlstraβe 1";
-    standorte[4]["info"][1] = "8042 Graz";
-    standorte[4]["info"][2] = "ÖSTERREICH";
-    standorte[4]["tel"] = "TEL: +43 316 4110 0";
-    standorte[4]["fax"] = "FAX: +43 316 4110 10";
-    standorte[4]["pin"] = "img/pins/pin_graz.png";
-    standorte[4]["mail"] = "info@pidas.com";
+      infoContent += '<h3>' + e["line1"] + '</h3>';
+      infoContent += e["company"] ? '<p class="company-name">' + e["company"] + '</p>' : "";
 
-    standorte[5] = new Array();
-    standorte[5]["info"] = new Array();
-    standorte[5]["latlng"] = new google.maps.LatLng(48.133950, 11.579601);
-    standorte[5]["line1"] = "München";
-    standorte[5]["info"][0] = "Opening soon";
-    standorte[5]["pin"] = "img/pins/pin_muenchen.png";
+      e["info"].forEach(function(e) {
+        infoContent += '<p>' + e + '</p>';
+      });
 
+      infoContent += e["tel"] ? '<p>' + e["tel"] + '</p>' : "";
+      infoContent += e["fax"] ? '<p>' + e["fax"] + '</p>' : "";
+      infoContent += e["mail"] ? '<p><a href=mailto:' + e["mail"] + '>' + e["mail"] + '</a></p>' : "";
 
-    // get current browser width
-    function getWidth() {
-        if (self.innerHeight) {
-            return self.innerWidth;
+      infoContent += '</div>';
+
+      marker.info = new google.maps.InfoWindow({
+        content: infoContent,
+        maxWidth: 400
+      });
+
+      // Close the other Info Windows when opening a new one
+      google.maps.event.addListener(marker, 'click', function() {
+        if (currentInfoWin !== null) {
+          currentInfoWin.close(map, this);
         }
-
-        if (document.documentElement && document.documentElement.clientHeight) {
-            return document.documentElement.clientWidth;
-        }
-
-        if (document.body) {
-            return document.body.clientWidth;
-        }
-    }
-
-    // set the zoom according to the browser width
-    function setZoom() {
-        if (getWidth() < 500) {
-            zoom = 5;
-        } else if (getWidth() < 900) {
-            zoom = 6;
-        } else {
-            zoom = 7;
-        }
-
-        map.setZoom(zoom);
-    }
-
-    // initialize the map
-    function initialize() {
-
-        var mapCanvas = document.getElementById('map-canvas');
-
-        var mapOptions = {
-            center: mapcenter,
-            zoom: mapzoom,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-
-        map = new google.maps.Map(mapCanvas, mapOptions);
-
-        // set Marker for eeach Standort
-        standorte.forEach(function(e) {
-
-            // create Marker
-            var marker = new google.maps.Marker({
-                position: e["latlng"],
-                map: map,
-                // title: 'Hello World!',
-                clickable: true,
-                icon: e["pin"] ? e["pin"] : iconpath
-            });
-
-            // create InfoWindow
-            var infoContent = '<div class="infoWindowContent">';
-
-            infoContent += '<h3>' + e["line1"] + '</h3>';
-            infoContent += e["company"] ? '<p class="company-name">' + e["company"] + '</p>' : "";
-
-            e["info"].forEach(function(e) {
-                infoContent += '<p>' + e + '</p>';
-            });
-
-            infoContent += e["tel"] ? '<p>' + e["tel"] + '</p>' : "";
-            infoContent += e["fax"] ? '<p>' + e["fax"] + '</p>' : "";
-            infoContent += e["mail"] ? '<p><a href=mailto:' + e["mail"] + '>' + e["mail"] + '</a></p>' : "";
-
-            infoContent += '</div>';
-
-            marker.info = new google.maps.InfoWindow({
-                content: infoContent,
-                maxWidth: 400
-            });
-
-            // Close the other Info Windows when opening a new one
-            google.maps.event.addListener(marker, 'click', function() {
-                if (currentInfoWin !== null) {
-                    currentInfoWin.close(map, this);
-                }
-                marker.info.open(map, marker);
-                currentInfoWin = marker.info;
-            });
-        });
-
-        // set zoom correctly according the browser width
-        setZoom();
-
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    // Center the map on resize and set the zoom correctly
-    google.maps.event.addDomListener(window, 'resize', function() {
-        google.maps.event.trigger(map, "resize");
-        map.setCenter(mapcenter);
-        setZoom();
-
+        marker.info.open(map, marker);
+        currentInfoWin = marker.info;
+      });
     });
-    </script>
+
+    // set zoom correctly according the browser width
+    setZoom();
+
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+  // Center the map on resize and set the zoom correctly
+  google.maps.event.addDomListener(window, 'resize', function() {
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(mapcenter);
+    setZoom();
+
+  });
+  </script>
 </head>
 
-<body>
+<body id="top">
+  <div class="top-bar" id="topbar">
+    <div class="row">
+      <div class="column">
+        <a class="left" href="#top">iTeas</a>
+        <ul class="menu">
+          <li><a href="#service">Sluzy</a></li>
+          <li><a href="#reference">Referencie</a></li>
+          <li><a href="#about">O Nas</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="panel hero-image">
     <div class="row hero-text-area">
       <div class="large-4 columns">
         <h1>Lorem ipsum dolor sit amet.</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex numquam quo tempora deleniti sint.</p>
-        <a href="#" class="primary medium button">Detail info</a>
+        <a href="#sem" class="primary medium button">Detail info</a>
       </div>
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="service">
     <div class="row ">
       <div class="medium-10 large-8 medium-centered columns text-center">
         <h1>Sluzby</h1>
@@ -280,10 +294,10 @@
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="reference">
     <div class="row ">
       <div class="medium-10 large-8 medium-centered columns text-center">
-        <h1>Referencie</h1>
+        <h1 id="sem">Referencie</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo aperiam, necessitatibus eum libero soluta dicta in pariatur? Laudantium ad inventore sed commodi nisi, aliquid veritatis necessitatibus numquam. Aliquam quisquam, nobis?</p>
       </div>
     </div>
@@ -326,7 +340,7 @@
   </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="about">
     <div class="row ">
       <div class="medium-10 large-8 medium-centered columns text-center">
         <h1>O Nas</h1>
@@ -350,7 +364,7 @@
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="contact">
     <div class="row">
       <div class="medium-10 medium-centered column text-center">
         <h1>Kontakt</h1>
@@ -372,11 +386,11 @@
               <textarea class="text-area" type="text" placeholder="Sprava" required></textarea>
             </div>
           </div>
-            <div class="row">
-              <div class="medium-4 medium-centered column">
-                <a href="#" class="primary medium button expand">Odoslat</a>
-              </div>
+          <div class="row">
+            <div class="medium-4 medium-centered column">
+              <a href="#" class="primary medium button expand">Odoslat</a>
             </div>
+          </div>
         </form>
       </div>
     </div>
@@ -387,6 +401,7 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/foundation/js/foundation.min.js"></script>
   <script src="bower_components/foundation/js/foundation.abide.js"></script>
+  <script src="bower_components/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
   <script src="js/vendors/owl.carousel.min.js"></script>
   <script src="js/app.js"></script>
   <script>
@@ -417,6 +432,25 @@
       }
     });
   });
+  </script>
+  <script>
+  $(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
+  </script>
+  <script>
+    $('#topbar').scrollupbar();
   </script>
 </body>
 

@@ -1,0 +1,13 @@
+.top-bar {
+  @include panel;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+.menu {
+  @include inline-list;
+  float: right;
+  margin: 0;
+}

@@ -1,6 +1,7 @@
 {
-  "name": "foundation-libsass-template",
+  "name": "iteas-v2",
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "foundation": "zurb/bower-foundation",
+    "scroll-up-bar": "scroll-up-bar"
   }
 }
