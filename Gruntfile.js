@@ -13,13 +13,35 @@ module.exports = function(grunt) {
         },
         files: {
           'css/app.css': 'scss/app.scss'
-        }        
+        }
       }
     },
-
+    uglify: {
+      my_target: {
+        options: {
+          mangle: false
+        },
+        files: {
+          'js/dist/app.min.js': [
+            'js/vendors/jquery.min.js',
+            'js/vendors/foundation.abide.js',
+            'js/vendors/foundation.abide.js',
+            'js/vendors/scroll-up-bar.min.js',
+            'js/vendors/owl.carousel.min.js',
+            'js/app.js'
+          ],
+          'js/dist/modernizr.min.js': 'js/vendors/modernizr.js'
+        }
+      }
+    },
     watch: {
-      grunt: { files: ['Gruntfile.js'] },
-
+      grunt: {
+        files: ['Gruntfile.js']
+      },
+      uglify: {
+        files: ['js/app.js'],
+        tasks: ['uglify']
+      },
       sass: {
         files: 'scss/**/*.scss',
         tasks: ['sass']
@@ -29,7 +51,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('build', ['sass']);
-  grunt.registerTask('default', ['build','watch']);
+  grunt.registerTask('build', ['sass', 'uglify']);
+  grunt.registerTask('default', ['build', 'uglify', 'watch']);
 }
