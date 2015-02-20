@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         files: {
           'js/dist/app.min.js': [
             'js/vendors/jquery.min.js',
-            'js/vendors/foundation.abide.js',
+            'js/vendors/foundation.min.js',
             'js/vendors/foundation.abide.js',
             'js/vendors/scroll-up-bar.min.js',
             'js/vendors/owl.carousel.min.js',
