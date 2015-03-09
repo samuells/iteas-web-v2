@@ -2363,7 +2363,7 @@ p {
 
 /* Default header styles */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: 'Open Sans', Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: bold;
   font-style: normal;
   color: #222222;
@@ -3179,20 +3179,25 @@ ul.off-canvas-list {
     .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
       background: #869791; }
 
-.service {
-  background-color: #ebab00;
+.service, .reference, .about, .contact {
   min-height: 300px; }
-  .service h1, .service p {
+  .service h1, .service p, .reference h1, .reference p, .about h1, .about p, .contact h1, .contact p {
     color: #FFFFFF; }
-  .service h1 {
+  .service h1, .reference h1, .about h1, .contact h1 {
     font-size: 3.5rem; }
-  .service p {
+  .service p, .reference p, .about p, .contact p {
+    font-family: 'Open Sans';
     font-size: 1.5rem; }
   @media only screen and (min-width:40.063em) {
-    .service {
-      background-image: url("../img/services.png");
+    .service, .reference, .about, .contact {
       background-position: center;
       background-size: initial; } }
+
+.service {
+  background-color: #ebab00; }
+  @media only screen and (min-width:40.063em) {
+    .service {
+      background-image: url("../img/services.png"); } }
 
 .service-content {
   padding-top: 80px; }
@@ -3201,41 +3206,26 @@ ul.off-canvas-list {
     margin-top: 1rem; }
 
 .reference {
-  background-color: #27AAE1;
-  min-height: 300px; }
+  background-color: #27AAE1; }
   @media only screen and (min-width:40.063em) {
     .reference {
-      background-image: url("../img/reference.png");
-      background-position: center;
-      background-size: initial; } }
-  .reference h1, .reference p {
-    color: #FFFFFF; }
+      background-image: url("../img/reference.png"); } }
 
 .about {
-  background-color: #275A79;
-  min-height: 300px; }
+  background-color: #275A79; }
   @media only screen and (min-width:40.063em) {
     .about {
-      background-image: url("../img/about.png");
-      background-position: center;
-      background-size: initial; } }
-  .about h1, .about p {
-    color: #FFFFFF; }
+      background-image: url("../img/about.png"); } }
 
 .about-content p {
   font-size: 1.25rem;
   text-align: justify; }
 
 .contact {
-  background-color: #15B0BF;
-  min-height: 300px; }
+  background-color: #15B0BF; }
   @media only screen and (min-width:40.063em) {
     .contact {
-      background-image: url("../img/contact.png");
-      background-position: center;
-      background-size: initial; } }
-  .contact h1, .contact p {
-    color: #FFFFFF; }
+      background-image: url("../img/contact.png"); } }
 
 .hero-image {
   background-color: #02395b;

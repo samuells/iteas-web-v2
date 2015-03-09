@@ -1,5 +1,4 @@
-.service {
-  background-color: $web-orange;
+.service, .reference, .about, .contact {
   min-height: 300px;
   h1, p {
     color: $white;
@@ -8,12 +7,19 @@
     font-size: 3.5rem;
   }
   p {
+    font-family: 'Open Sans';
     font-size: 1.5rem;
   }
   @media #{$medium-up} {
-    background-image: url("../img/services.png");
     background-position: center;
     background-size: initial;
+  }
+}
+
+.service {
+  background-color: $web-orange;
+  @media #{$medium-up} {
+    background-image: url("../img/services.png");
   }
 }
 
@@ -27,27 +33,15 @@
 
 .reference {
   background-color: $curious-blue;
-  min-height: 300px;
   @media #{$medium-up} {
     background-image: url("../img/reference.png");
-    background-position: center;
-    background-size: initial;
-  }
-  h1, p {
-    color: $white;
   }
 }
 
 .about {
   background-color: $astronaut;
-  min-height: 300px;
   @media #{$medium-up} {
     background-image: url("../img/about.png");
-    background-position: center;
-    background-size: initial;
-  }
-  h1, p {
-    color: $white;
   }
 }
 
@@ -60,13 +54,7 @@
 
 .contact {
   background-color: $java-blue;
-  min-height: 300px;
   @media #{$medium-up} {
     background-image: url("../img/contact.png");
-    background-position: center;
-    background-size: initial;
-  }
-  h1, p {
-    color: $white;
   }
 }
