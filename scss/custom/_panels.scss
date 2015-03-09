@@ -1,0 +1,72 @@
+.service {
+  background-color: $web-orange;
+  min-height: 300px;
+  h1, p {
+    color: $white;
+  }
+  h1 {
+    font-size: 3.5rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+  @media #{$medium-up} {
+    background-image: url("../img/services.png");
+    background-position: center;
+    background-size: initial;
+  }
+}
+
+.service-content {
+  padding-top: 80px;
+  h2 {
+    font-weight: normal;
+    margin-top: rem-calc(16px);
+  }
+}
+
+.reference {
+  background-color: $curious-blue;
+  min-height: 300px;
+  @media #{$medium-up} {
+    background-image: url("../img/reference.png");
+    background-position: center;
+    background-size: initial;
+  }
+  h1, p {
+    color: $white;
+  }
+}
+
+.about {
+  background-color: $astronaut;
+  min-height: 300px;
+  @media #{$medium-up} {
+    background-image: url("../img/about.png");
+    background-position: center;
+    background-size: initial;
+  }
+  h1, p {
+    color: $white;
+  }
+}
+
+.about-content {
+  p {
+    font-size: rem-calc(20);
+    text-align: justify;
+  }
+}
+
+.contact {
+  background-color: $java-blue;
+  min-height: 300px;
+  @media #{$medium-up} {
+    background-image: url("../img/contact.png");
+    background-position: center;
+    background-size: initial;
+  }
+  h1, p {
+    color: $white;
+  }
+}

@@ -1,8 +1,7 @@
 .top-bar {
-  @include panel;
-  background-color: rgba(0,0,0,0.5);
   position: absolute;
   width: 100%;
+  background-color: rgba(0,0,0,0.5);
   z-index: 10;
 }
 
@@ -10,4 +9,9 @@
   @include inline-list;
   float: right;
   margin: 0;
+  & > li a {
+    height: 65px;
+    line-height: 65px;
+    color: $white;
+  }
 }

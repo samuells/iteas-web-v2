@@ -1,0 +1,22 @@
+.footer {
+  li a {
+    color: white;
+  }
+  @media #{$medium-up} {
+    li{
+      text-align: left;
+    }
+  }
+}
+
+.address {
+  p {
+    font-size: rem-calc(11);
+    color: white;
+    margin: 0;
+    text-align: right;
+  }
+  p:first-child {
+    font-size: rem-calc(16);
+  }
+}

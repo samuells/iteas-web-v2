@@ -97,7 +97,7 @@ $font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-
 // $font-weight-normal: normal;
 // $font-weight-bold: bold;
 
-// $white       : #FFFFFF;
+$white       : #FFFFFF;
 // $ghost       : #FAFAFA;
 // $snow        : #F9F9F9;
 // $vapor       : #F6F6F6;
@@ -142,8 +142,8 @@ $body-font-family: $font-family-sans-serif;
 // $last-child-float: $opposite-direction;
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
-// $global-rounded: 1000px;
+$global-radius: 3px;
+$global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
@@ -198,8 +198,8 @@ $body-font-family: $font-family-sans-serif;
 $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-// $header-font-family: $body-font-family;
-// $header-font-weight: $font-weight-normal;
+$header-font-family: 'Roboto', $body-font-family;
+$header-font-weight: bold;
 // $header-font-style: normal;
 // $header-font-color: $jet;
 // $header-line-height: 1.4;
@@ -423,7 +423,7 @@ $h1-font-size: rem-calc(44);
 // 05. Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-button-classes: $include-html-classes;
+$include-html-button-classes: $include-html-classes;
 
 // We use these to build padding for buttons.
 // $button-tny: rem-calc(10);
@@ -437,7 +437,7 @@ $h1-font-size: rem-calc(44);
 
 // We use these to control button text styles.
 // $button-font-family: $body-font-family;
-// $button-font-color: $white;
+$button-font-color: $astronaut-blue;
 // $button-font-color-alt: $oil;
 // $button-font-tny: rem-calc(11);
 // $button-font-sml: rem-calc(13);
@@ -452,7 +452,7 @@ $h1-font-size: rem-calc(44);
 // We use these to control button border styles.
 // $button-border-width: 0;
 // $button-border-style: solid;
-// $button-bg-color: $primary-color;
+$button-bg-color: $web-orange;
 // $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
 // $button-border-color: $button-bg-hover;
 // $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
@@ -969,7 +969,8 @@ $include-html-panel-classes: $include-html-classes;
 
 // We use these to control the background and border styles
 // $panel-bg: scale-color($white, $lightness: -5%);
-// $panel-border-style: solid;
+$panel-bg: $white;
+$panel-border-style: none;
 // $panel-border-size: 1px;
 
 // We use this % to control how much we darken things on hover
@@ -978,7 +979,7 @@ $include-html-panel-classes: $include-html-classes;
 
 // We use these to set default inner padding and bottom margin
 $panel-margin-bottom: 0;
-// $panel-padding: rem-calc(20);
+$panel-padding: rem-calc(40);
 
 // We use these to set default font colors
 // $panel-font-color: $oil;
@@ -1378,7 +1379,7 @@ $panel-margin-bottom: 0;
 // 34. Top Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-top-bar-classes: $include-html-classes;
+$include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
@@ -1452,6 +1453,8 @@ $panel-margin-bottom: 0;
 // Divider Styles
 // $topbar-divider-border-bottom: solid 1px scale-color($topbar-bg-color, $lightness: 13%);
 // $topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: -50%);
+$topbar-divider-border-bottom: none;
+$topbar-divider-border-top: none;
 
 // Sticky Class
 // $topbar-sticky-class: ".sticky";

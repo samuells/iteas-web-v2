@@ -6,6 +6,7 @@
 // 3. Owl Carousel clasess
 // 4. Custom classes
 @import "custom/fonts";
+@import "iteas-settings";
 @import "settings"; // inside import of functions
 
 // 2. Foundations classes
@@ -56,7 +57,10 @@
 // @import "owl.carousel/owl.video";
 
 // 4. Custom classes
+@import "custom/panels";
 @import "custom/hero-image";
 @import "custom/owl-carousel";
 @import "custom/form";
 @import "custom/top-bar";
+@import "custom/map";
+@import "custom/footer";
