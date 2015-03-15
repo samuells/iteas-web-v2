@@ -3179,7 +3179,36 @@ ul.off-canvas-list {
     .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
       background: #869791; }
 
+.parallax {
+  position: relative;
+  border: 10px dashed;
+  perspective: 1px;
+  height: 50vh;
+  overflow-x: hidden;
+  overflow-y: auto; }
+  .parallax .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%); }
+
+.parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.parallax__layer--base {
+  transform: translateZ(0);
+  border: 2px solid pink; }
+
+.parallax__layer--back {
+  transform: translateZ(-1px) scale(2);
+  border: 3px dotted red; }
+
 .service, .reference, .about, .contact {
+  position: relative;
   min-height: 300px; }
   .service h1, .service p, .reference h1, .reference p, .about h1, .about p, .contact h1, .contact p {
     color: #FFFFFF; }
@@ -3188,6 +3217,11 @@ ul.off-canvas-list {
   .service p, .reference p, .about p, .contact p {
     font-family: 'Open Sans';
     font-size: 1.5rem; }
+  .service > .row, .reference > .row, .about > .row, .contact > .row {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
   @media only screen and (min-width:40.063em) {
     .service, .reference, .about, .contact {
       background-position: center;
@@ -3203,7 +3237,11 @@ ul.off-canvas-list {
   padding-top: 80px; }
   .service-content h2 {
     font-weight: normal;
-    margin-top: 1rem; }
+    margin-top: 1rem;
+    line-height: 2.8125rem; }
+  .service-content p {
+    text-align: justify;
+    padding: 0 30px; }
 
 .reference {
   background-color: #27AAE1; }
@@ -3243,6 +3281,10 @@ ul.off-canvas-list {
         background-image: url("../img/hero-image.png"); } }
   .hero-image h1, .hero-image p {
     color: #FFFFFF; }
+  .hero-image h1 {
+    font-size: 3.4375rem; }
+  .hero-image p {
+    font-size: 1.25rem; }
 
 .hero-text-area {
   position: absolute;
@@ -3275,6 +3317,13 @@ ul.off-canvas-list {
           clear: none; }
         .owl-carousel > li:nth-of-type(4n+1) {
           clear: both; } }
+  .owl-carousel li.item {
+    text-align: center;
+    height: 160px; }
+    .owl-carousel li.item img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%); }
 
 .text-area {
   min-height: 200px; }
@@ -3304,15 +3353,29 @@ ul.off-canvas-list {
   .menu > li a {
     height: 65px;
     line-height: 65px;
-    color: #FFFFFF; }
+    color: #FFFFFF;
+    text-transform: uppercase; }
+
+.logo {
+  float: left;
+  padding: 8px 0 7px 0; }
+  .logo img {
+    height: 50px;
+    width: auto; }
 
 .map {
   position: relative;
+  height: 100%;
   padding: 0; }
+
+#map-canvas {
+  width: 100% !important;
+  height: 100%; }
 
 .footer {
   position: absolute;
   bottom: 0;
+  padding-bottom: 10px;
   left: 0;
   width: 100%;
   background: rgba(0, 0, 0, 0.8);

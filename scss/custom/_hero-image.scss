@@ -16,6 +16,12 @@
   h1, p {
     color: $white;
   }
+  h1 { 
+    font-size : rem-calc(55px);
+  }
+  p {
+    font-size : rem-calc(20px);
+  }
 }
 
 .hero-text-area {

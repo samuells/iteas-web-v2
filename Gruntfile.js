@@ -28,6 +28,7 @@ module.exports = function(grunt) {
             'js/vendors/foundation.abide.js',
             'js/vendors/scroll-up-bar.min.js',
             'js/vendors/owl.carousel.min.js',
+            'js/vendors/parallax.min.js',
             'js/app.js'
           ],
           'js/dist/modernizr.min.js': 'js/vendors/modernizr.js'

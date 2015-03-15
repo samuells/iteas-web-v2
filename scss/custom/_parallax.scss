@@ -1,0 +1,32 @@
+.parallax {
+  position: relative;
+  border: 10px dashed;
+  perspective: 1px;
+  height: 50vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+
+.parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.parallax__layer--base {
+  transform: translateZ(0);
+  border: 2px solid pink;
+}
+
+.parallax__layer--back {
+  transform: translateZ(-1px) scale(2);
+  border: 3px dotted red;
+}

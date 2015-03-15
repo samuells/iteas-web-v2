@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="css/app.css" />
   <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <script src="js/dist/modernizr.min.js"></script>
+  <script src="js/vendors/holder.min.js"></script>
   <style>
-  /*.infoWindowContent {
+  .infoWindowContent {
     line-height: 1.35;
     overflow: hidden;
     white-space: nowrap;
@@ -23,10 +25,11 @@
   }
   div.gm-style-iw {
     overflow: hidden!important;
-  }*/
+  }
   </style>
   <script src="js/dist/modernizr.min.js"></script>
-
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="js/map.js"></script>
 </head>
 
 <body id="top">
@@ -59,7 +62,34 @@
     </div>
   </div>
 
-  <div class="panel service" id="service">
+  <!-- <div class="parallax">
+    <div class="top-bar" id="topbar" style="position: absolute; top: 0; left:0;">
+      <div class="row">
+        <div class="column">
+          <a class="logo left" href="#top"><img src="img/logo.png" height="67" width="134" alt="">
+          </a>
+          <ul class="menu">
+            <li><a href="#service">Služby</a>
+            </li>
+            <li><a href="#reference">Referencie</a>
+            </li>
+            <li><a href="#about">O Nás</a>
+            </li>
+            <li><a href="#contact">Kontakt</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="parallax__layer parallax__layer--back">
+      <div class="title">layer back</div>
+    </div>
+    <div class="parallax__layer parallax__layer--base">
+      <div class="title">layer base</div>
+    </div>
+  </div> -->
+
+  <div class="panel service" id="service" data-parallax="scroll" data-image-src="img/services.png" data-speed="0">
     <div class="row" >
       <div class="medium-8 large-6 medium-centered columns text-center">
         <h1>Služby</h1>
@@ -202,19 +232,19 @@
         <form data-abide>
           <div class="row">
             <div class="medium-6 columns">
-              <input type="text" placeholder="Vase Meno" required pattern="[a-zA-Z]+" id="formName">
+              <input type="text" placeholder="Vase Meno" required pattern="[a-zA-Z]+">
             </div>
             <div class="medium-6 columns">
-              <input type="email" placeholder="Email" required pattern="email" id="formEmail">
+              <input type="email" placeholder="Email" required pattern="email">
               <small class="error">A valid email address is required.</small>
             </div>
             <div class="medium-12 columns">
-              <textarea class="text-area" type="text" placeholder="Sprava" required id="formText"></textarea>
+              <textarea class="text-area" type="text" placeholder="Sprava" required></textarea>
             </div>
           </div>
           <div class="row">
             <div class="medium-4 medium-centered column">
-              <a href="#" class="primary medium button expand" id="sendForm">Odoslat</a>
+              <a href="#" class="primary medium button expand">Odoslat</a>
             </div>
           </div>
         </form>
@@ -223,9 +253,7 @@
   </div>
 
   <div class="map">
-    <div id="map-canvas">
-      <div id="maplabel" style="width:100px;height:100px;background:blue;"></div>
-    </div>
+    <div id="map-canvas"></div>
     <div class="panel footer">
       <div class="row text-center">
         <div class="medium-4 columns">
@@ -313,10 +341,9 @@
     console.log('hallo');
   }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/mail.js"></script>
+  <script>
+  // $('.service').parallax({imageSrc: 'img/services.png'});
+  </script>
 </body>
 
 </html>
