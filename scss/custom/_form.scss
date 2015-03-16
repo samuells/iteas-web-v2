@@ -1,3 +1,15 @@
 .text-area {
   min-height: 200px;
 }
+
+.send-button {
+  @include button($full-width: true);
+  color: $white;
+  box-shadow: 0 2px #cccccc;
+}
+
+div.error {
+  textarea, input {
+    border: 1px solid $web-orange;
+  }
+}

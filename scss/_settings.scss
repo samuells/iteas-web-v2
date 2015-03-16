@@ -70,6 +70,7 @@
 
 // We use this to control whether or not CSS classes come through in the gem files.
 $include-html-classes: true;
+
 // $include-print-styles: true;
 $include-html-global-classes: $include-html-classes;
 
@@ -90,6 +91,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to define default font stacks
 $font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -97,7 +99,8 @@ $font-family-sans-serif: Lato, "Helvetica Neue", Helvetica, Roboto, Arial, sans-
 // $font-weight-normal: normal;
 // $font-weight-bold: bold;
 
-$white       : #FFFFFF;
+$white: #FFFFFF;
+
 // $ghost       : #FAFAFA;
 // $snow        : #F9F9F9;
 // $vapor       : #F6F6F6;
@@ -129,6 +132,7 @@ $white       : #FFFFFF;
 // $body-bg: $white;
 // $body-font-color: $jet;
 $body-font-family: $font-family-sans-serif;
+
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -198,8 +202,9 @@ $global-rounded: 1000px;
 $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-$header-font-family: 'Open Sans', $body-font-family;
+$header-font-family: "Open Sans", $body-font-family;
 $header-font-weight: bold;
+
 // $header-font-style: normal;
 // $header-font-color: $jet;
 // $header-line-height: 1.4;
@@ -209,6 +214,7 @@ $header-font-weight: bold;
 
 // We use these to control header font sizes
 $h1-font-size: rem-calc(44);
+
 // $h2-font-size: rem-calc(37);
 // $h3-font-size: rem-calc(27);
 // $h4-font-size: rem-calc(23);
@@ -438,6 +444,7 @@ $include-html-button-classes: $include-html-classes;
 // We use these to control button text styles.
 // $button-font-family: $body-font-family;
 $button-font-color: $astronaut-blue;
+
 // $button-font-color-alt: $oil;
 // $button-font-tny: rem-calc(11);
 // $button-font-sml: rem-calc(13);
@@ -453,6 +460,7 @@ $button-font-color: $astronaut-blue;
 // $button-border-width: 0;
 // $button-border-style: solid;
 $button-bg-color: $web-orange;
+
 // $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
 // $button-border-color: $button-bg-hover;
 // $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
@@ -563,7 +571,6 @@ $button-bg-color: $web-orange;
 // Default radius for dropdown.
 // $f-dropdown-radius: $global-radius;
 
-
 // 09. Dropdown Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -619,7 +626,7 @@ $button-bg-color: $web-orange;
 // 11. Forms
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// $include-html-form-classes: $include-html-classes;
+$include-html-form-classes: $include-html-classes;
 
 // We use this to set the base for lots of form spacing and positioning styles
 // $form-spacing: rem-calc(16);
@@ -632,19 +639,25 @@ $button-bg-color: $web-orange;
 // $form-label-font-color: scale-color($black, $lightness: 30%);
 // $form-label-small-transform: capitalize;
 // $form-label-bottom-margin: 0;
-// $input-font-family: inherit;
-// $input-font-color: rgba(0,0,0,0.75);
-// $input-font-size: rem-calc(14);
-// $input-bg-color: $white;
+$input-font-family: $font-family-sans-serif;
+
+$input-font-color: rgba(0, 0, 0, 0.75);
+$input-font-size: rem-calc(16);
+$input-bg-color: scale-color($white, $lightness: -2%);
+$input-focus-bg-color: scale-color($white, $lightness: -2%);
+
 // $input-focus-bg-color: scale-color($white, $lightness: -2%);
 // $input-border-color: scale-color($white, $lightness: -20%);
 // $input-focus-border-color: scale-color($white, $lightness: -40%);
-// $input-border-style: solid;
-// $input-border-width: 1px;
+$input-border-style: none;
+$input-border-width: 2px;
+
 // $input-border-radius: $global-radius;
 // $input-disabled-bg: $gainsboro;
 // $input-disabled-cursor: $cursor-default-value;
-// $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+// $input-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+$input-box-shadow: inset 1px 1px 2px #999999;
+
 // $input-include-glowing-effect: true;
 
 // We use these to style the fieldset border and spacing.
@@ -674,11 +687,13 @@ $button-bg-color: $web-orange;
 // We use these to style the error states for inputs and labels
 // $input-error-message-padding: rem-calc(6 9 9);
 // $input-error-message-top: -1px;
-// $input-error-message-font-size: rem-calc(12);
-// $input-error-message-font-weight: $font-weight-normal;
+$input-error-message-font-size: rem-calc(14);
+$input-error-message-font-weight: bold;
+
 // $input-error-message-font-style: italic;
 // $input-error-message-font-color: $white;
-// $input-error-message-bg-color: $alert-color;
+$input-error-message-bg-color: $web-orange;
+
 // $input-error-message-font-color-alt: $oil;
 
 // We use this to style the glowing effect of inputs when focused
@@ -688,7 +703,6 @@ $button-bg-color: $web-orange;
 // Select variables
 // $select-bg-color: $ghost;
 // $select-hover-bg-color: scale-color($select-bg-color, $lightness: -3%);
-
 
 // 12. Icon Bar
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -830,7 +844,6 @@ $include-html-off-canvas-classes: $include-html-classes;
 // $tabbar-left-section-border: solid 1px scale-color($tabbar-bg, $lightness: -50%);
 // $tabbar-right-section-border: $tabbar-left-section-border;
 
-
 // Off Canvas Tab Bar Headers
 // $tabbar-header-color: $white;
 // $tabbar-header-weight: $font-weight-bold;
@@ -927,7 +940,7 @@ $off-canvas-bg: red;
 // Hide controls on small
 // $orbit-nav-hide-for-small: true;
 // $orbit-bullet-hide-for-small: true;
-// $orbit-timer-hide-for-small: true; 
+// $orbit-timer-hide-for-small: true;
 
 // 20. Pagination
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -971,6 +984,7 @@ $include-html-panel-classes: $include-html-classes;
 // $panel-bg: scale-color($white, $lightness: -5%);
 $panel-bg: $white;
 $panel-border-style: none;
+
 // $panel-border-size: 1px;
 
 // We use this % to control how much we darken things on hover
@@ -1017,7 +1031,6 @@ $panel-padding: rem-calc(40);
 // $price-money-weight: $font-weight-normal;
 // $price-money-size: rem-calc(32);
 // $price-money-font-family: $body-font-family;
-
 
 // We use these to control the description styles
 // $price-bg: $white;
@@ -1234,7 +1247,6 @@ $panel-padding: rem-calc(40);
 // $sub-nav-border-radius: 3px;
 // $sub-nav-font-color-hover: scale-color($sub-nav-font-color, $lightness: -25%);
 
-
 // We use these to control the active item styles
 
 // $sub-nav-active-font-weight: $font-weight-normal;
@@ -1266,7 +1278,7 @@ $panel-padding: rem-calc(40);
 // $switch-paddle-bg: $white;
 // $switch-paddle-transition-speed: .15s;
 // $switch-paddle-transition-ease: ease-out;
-// $switch-active-color: $primary-color; 
+// $switch-active-color: $primary-color;
 
 // 30. Tables
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1312,7 +1324,6 @@ $panel-padding: rem-calc(40);
 // $table-layout: auto;
 // $table-display: table-cell;
 // $table-margin-bottom: rem-calc(20);
-
 
 // 31. Tabs
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1459,7 +1470,7 @@ $topbar-divider-border-top: none;
 // Sticky Class
 // $topbar-sticky-class: ".sticky";
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
-// $topbar-dropdown-arrows: true; //Set false to remove the \00bb >> text from dropdown subnavigation li// 
+// $topbar-dropdown-arrows: true; //Set false to remove the \00bb >> text from dropdown subnavigation li//
 
 // 36. Visibility Classes
 // - - - - - - - - - - - - - - - - - - - - - - - - -

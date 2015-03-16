@@ -202,19 +202,21 @@
         <form data-abide>
           <div class="row">
             <div class="medium-6 columns">
-              <input type="text" placeholder="Vase Meno" required pattern="[a-zA-Z]+" id="formName">
+              <input type="text" placeholder="Vaše Meno" required pattern="[a-zA-Z]+" id="formName">
+              <small class="error">Prosím zadajte Vaše Meno. Napríklad "Ján Mrkvička"</small>
             </div>
             <div class="medium-6 columns">
-              <input type="email" placeholder="Email" required pattern="email" id="formEmail">
-              <small class="error">A valid email address is required.</small>
+              <input type="email" placeholder="Váš email (Nespamujeme)" required pattern="email" id="formEmail">
+              <small class="error">Skontrolujte si prosím email. Nie je v poriadku.</small>
             </div>
             <div class="medium-12 columns">
-              <textarea class="text-area" type="text" placeholder="Sprava" required id="formText"></textarea>
+              <textarea class="text-area" type="text" placeholder="Tu nám môžete napísať, čo máte na srdci." required id="formText"></textarea>
+              <small class="error">Nechceli by ste nám napísať aj správu?</small>
             </div>
           </div>
           <div class="row">
             <div class="medium-4 medium-centered column">
-              <a href="#" class="primary medium button expand" id="sendForm">Odoslat</a>
+              <a href="#" class="send-button expand" id="sendForm">ODOSLAŤ</a>
             </div>
           </div>
         </form>

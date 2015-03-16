@@ -1,3 +1,10 @@
+@media #{$small-only} {
+  .panel, .service, .reference, .about, .contact {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .service, .reference, .about, .contact {
   position: relative;
   min-height: 300px;
